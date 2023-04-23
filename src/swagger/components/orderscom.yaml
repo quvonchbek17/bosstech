@@ -1,0 +1,41 @@
+components:
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ResponseOrder:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+
+    Orders:
+      type: object
+      properties:
+        success:
+           type: boolean
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              count:
+                type: number
+              user:
+                schema:
+                  $ref: "#/components/schemas/Users"
+              product:
+                schema:
+                  $ref: "#/components/schemas/Products"
+              created_at:
+                type: string
+                format: date
+              updated_at:
+                type: string
+                format: date

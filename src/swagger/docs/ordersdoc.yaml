@@ -1,0 +1,142 @@
+/orders:
+  get:
+    security:
+      -  Token: []
+    tags:
+      - orders
+    summary: Barcha buyurtmalarni olish
+    responses:
+      200:
+        description: orders
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Orders"
+
+  post:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary:  "Buyurtma qo'shish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                example: 3
+              userId:
+                type: string
+                example: "6443a38268f1be387cf20985"
+              productId:
+                type: string
+                example: "6443a3a44b3be019811afe15"
+      required: true
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"
+  patch:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary:  "Buyurtma ma'lumotlarini o'zgartirish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "6442b42688394d9be6824b7c"
+                required: true
+              count:
+                type: number
+                example: 3
+              userId:
+                type: string
+                example: "6443a38268f1be387cf20985"
+              productId:
+                type: string
+                example: "6443a3a44b3be019811afe15"
+
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"
+/orders/{orderId}:
+  get:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary: "bitta buyurtma ma'lumotlarini olish"
+    parameters:
+      - name: orderId
+        in: path
+        description: orderid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"
+  delete:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary: "buyurtma o'chirish"
+    parameters:
+      - name: orderId
+        in: path
+        description: orderid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"
+
+/orders/createdat:
+  get:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary: "Buyurtmalarni oxirgi yaratilgani bo'yicha sortlab olish"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"
+
+/orders/count:
+  get:
+    security:
+     - Token: []
+    tags:
+      - orders
+    summary: "Buyurtmalarni buyurtma qilingan soni bo'yicha sortlab olish"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseOrder"

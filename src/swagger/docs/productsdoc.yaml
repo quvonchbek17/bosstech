@@ -1,0 +1,154 @@
+/products:
+  get:
+    security:
+      -  Token: []
+    tags:
+      - products
+    summary: Barcha productlarni olish
+    responses:
+      200:
+        description: products
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Products"
+
+  post:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary:  "Mahsulot qo'shish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Asus"
+              price:
+                type: string
+                example: "1000"
+              desc:
+                type: string
+                example: "Bu yerda mahsulot haqida ma'lumot bo'lishi kerak edi"
+      required: true
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+  patch:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary:  "Mahsulot ma'lumotlarini o'zgartirish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "6442b42688394d9be6824b7c"
+                required: true
+              name:
+                type: string
+                example: "Lenovo legion"
+              price:
+                type: string
+                example: "900"
+              desc:
+                type: string
+                example: "Bu yerda mahsulot haqida ma'lumot bo'lishi kerak edi"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+/products/{productId}:
+  get:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary: "bitta mahsulot ma'lumotini olish"
+    parameters:
+      - name: productId
+        in: path
+        description: productid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+  delete:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary: "product o'chirish"
+    parameters:
+      - name: productId
+        in: path
+        description: productid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+
+/products/name:
+  get:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary: "Mahsulotlarni nomi bo'yicha sortlab olish"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+
+/products/price:
+  get:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary: "Mahsulotlarni narxi bo'yicha sortlab olish. Arzondan qimmatga qarab"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"
+/products/pricedesc:
+  get:
+    security:
+     - Token: []
+    tags:
+      - products
+    summary: "Mahsulotlarni narxi bo'yicha sortlab olish. Qimmatdan arzonga qarab"
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseProduct"

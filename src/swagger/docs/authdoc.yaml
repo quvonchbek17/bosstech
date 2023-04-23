@@ -1,0 +1,25 @@
+/auth/admins/login:
+  post:
+    tags:
+      - auth
+    summary: "Adminlar uchun"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: "bosstech@gmail.com"
+              password:
+                type: string
+                example: "12345"
+      required: true
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Response"
+

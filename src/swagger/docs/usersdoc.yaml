@@ -1,0 +1,114 @@
+/users:
+  get:
+    security:
+      -  Token: []
+    tags:
+      - users
+    summary: Barcha userlarni olish
+    responses:
+      200:
+        description: users
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users"
+
+  post:
+    security:
+     - Token: []
+    tags:
+      - users
+    summary:  "User qo'shish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Quvonchbek"
+              email:
+                type: string
+                example: "quvonchbek@gmail.com"
+              password:
+                type: string
+                example: "12345"
+      required: true
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseUser"
+  patch:
+    security:
+     - Token: []
+    tags:
+      - users
+    summary:  "User ma'lumotlarini o'zgartirish"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "6442b42688394d9be6824b7c"
+                required: true
+              name:
+                type: string
+                example: "Alisher"
+              email:
+                type: string
+                example: "1111@gmail.com"
+              password:
+                type: string
+                example: "1234"
+
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseUser"
+/users/{userId}:
+  get:
+    security:
+     - Token: []
+    tags:
+      - users
+    summary: "bitta user ma'lumotlarini olish"
+    parameters:
+      - name: userId
+        in: path
+        description: userid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseUser"
+  delete:
+    security:
+     - Token: []
+    tags:
+      - users
+    summary: "user o'chirish"
+    parameters:
+      - name: userId
+        in: path
+        description: userid ni kiriting
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseUser"

@@ -1,0 +1,14 @@
+components:
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ResponseUpload:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string

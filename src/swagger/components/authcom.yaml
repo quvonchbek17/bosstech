@@ -1,0 +1,9 @@
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
